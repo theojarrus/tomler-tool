@@ -193,7 +193,7 @@ def get_table_versions_rows(versions):
 
 def get_table_columns_widths(rows):
     columns = [[row[column] for row in rows] for column in range(min(map(len, rows)))]
-    widths = [max(map(len, column)) for column in columns]
+    widths = [max(map(len, map(str, column))) for column in columns]
     return widths
 
 
@@ -212,7 +212,7 @@ def get_table_line(columns_widths):
 def print_table_rows(rows, columns_widths, table_width):
     info(get_table_row_divider(table_width))
     for row in rows:
-        info(get_table_line(columns_widths).format(*row))
+        info(get_table_line(columns_widths).format(*map(str, row)))
 
 
 def print_table(module, versions):
